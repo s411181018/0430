@@ -6,6 +6,9 @@
     --secondary-text: #7A7873; /* 淺灰色 */
     --border-color: #DCD8C8;   /* 邊框色 */
     --container-width: 900px;  /* 稍微縮小寬度，讓版面更集中 */
+    
+    /* 古風圖案相關變數 */
+    --pattern-color: #E2E0D8;  /* 極淺的圖案色 */
 }
 
 * {
@@ -22,6 +25,10 @@ body {
     /* 內文使用黑體，保持易讀性 */
     font-family: 'Noto Sans TC', sans-serif;
     background-color: var(--bg-color);
+    
+    /* 1. 加入淡淡的墨跡/宣紙紋理作為整個背景 */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none" /><path d="M10 10c2.5 0 5 1.5 5 4s-2.5 4-5 4H0V10zM20 20c2.5 0 5 1.5 5 4s-2.5 4-5 4H10V20zM30 30c2.5 0 5 1.5 5 4s-2.5 4-5 4H20V30zM40 40c2.5 0 5 1.5 5 4s-2.5 4-5 4H30V40zM50 50c2.5 0 5 1.5 5 4s-2.5 4-5 4H40V50zM60 60c2.5 0 5 1.5 5 4s-2.5 4-5 4H50V60zM70 70c2.5 0 5 1.5 5 4s-2.5 4-5 4H60V70zM80 80c2.5 0 5 1.5 5 4s-2.5 4-5 4H70V80zM90 90c2.5 0 5 1.5 5 4s-2.5 4-5 4H80V90z" fill="%23DCD8C8" fill-opacity="0.1" /></svg>'); 
+    
     color: var(--text-color);
     line-height: 2; /* 增加行距，提升呼吸感 */
     letter-spacing: 0.05em; /* 稍微增加字距 */
@@ -40,6 +47,7 @@ h1, h2, h3, .logo, .hero-title, .section-title {
 
 .section {
     padding: 120px 0; /* 增加上下留白 */
+    position: relative; /* 用於放置 Section 級別的圖案 */
 }
 
 .section-title {
@@ -47,6 +55,21 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     margin-bottom: 2.5rem;
     font-weight: 400;
     color: var(--accent-color);
+    position: relative; /* 用於放置雲紋裝飾 */
+}
+
+/* 2. 在 Section 標題下方加入雲紋裝飾線 */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 10px;
+    /* 這裡使用一個簡單的 SVG 雲紋圖案數據 */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0 10s20 10 40 10 40-10 60-10H0z" fill="%2379826A" fill-opacity="0.2" /></svg>'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 1rem;
+    left: 0;
 }
 
 /* --- 導航列 --- */
@@ -71,6 +94,19 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     font-weight: 600;
     letter-spacing: 2px;
     color: var(--text-color);
+    position: relative;
+}
+
+/* 3. 在 Logo 旁加入一個小小印章風格的圖案 */
+.logo::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%2379826A" stroke-width="5" fill="none"/><path d="M50 20 L50 80 M20 50 L80 50" stroke="%2379826A" stroke-width="5"/></svg>'); 
+    background-size: contain;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
 .nav-links {
@@ -100,6 +136,12 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     align-items: center;
     justify-content: center;
     text-align: center;
+    
+    /* 4. 在 Hero section 下方加入淡淡的水墨山水背景圖 */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M0 800c100-20 200 10 300 10s200-30 300-30 200 40 300 40 100-10 100-10v200H0V800z" fill="%23DCD8C8" fill-opacity="0.3"/><path d="M0 700c150-10 300 10 450 10s300-20 450-20 100 10 100 10v300H0V700z" fill="%23DCD8C8" fill-opacity="0.2"/><path d="M0 600c200-5 400 5 600 5s200-10 400-10h100v400H0V600z" fill="%23DCD8C8" fill-opacity="0.1"/><path d="M0 900 L1000 900 M 0 950 L 1000 950" stroke="%23DCD8C8" stroke-width="1" fill="none"/></svg>'); 
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
 }
 
 .hero-title {
@@ -107,6 +149,20 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     font-weight: 400;
     margin-bottom: 1.5rem;
     color: var(--text-color);
+    position: relative;
+    z-index: 1; /* 確保文字在圖案上方 */
+}
+
+/* 5. 在 Hero 標題右側加一個小小梅花圖案 */
+.hero-title::after {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 0 L 100 100 L 0 100 Z" fill="%2379826A" fill-opacity="0.4" /></svg>'); 
+    background-size: contain;
+    margin-left: 0.5rem;
+    vertical-align: middle;
 }
 
 .highlight {
@@ -118,13 +174,20 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     color: var(--secondary-text);
     margin-bottom: 3.5rem;
     font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-cta {
+    position: relative;
+    z-index: 1;
 }
 
 /* --- 按鈕樣式 --- */
 .btn {
     display: inline-block;
     padding: 0.8rem 2.5rem;
-    border-radius: 2px; /* 捨棄大圓角，改用微小圓角顯得俐落 */
+    border-radius: 2px; /* 俐落的小圓角 */
     text-decoration: none;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -155,6 +218,21 @@ h1, h2, h3, .logo, .hero-title, .section-title {
 /* --- About & Tags --- */
 .about-content {
     max-width: 650px; /* 限制寬度讓閱讀體驗更好 */
+    position: relative;
+}
+
+/* 6. 在 About section 段落下方放置一個小小竹子插圖 */
+.about-content.with-pattern p::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 100 L 10 90 L 10 100 Z M 10 100 L 20 80 L 20 100 Z M 20 100 L 30 70 L 30 100 Z M 30 100 L 40 60 L 40 100 Z M 40 100 L 50 50 L 50 100 Z" fill="%2379826A" fill-opacity="0.3"/></svg>'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: -1rem;
+    right: 0;
 }
 
 .about-content p {
@@ -164,6 +242,7 @@ h1, h2, h3, .logo, .hero-title, .section-title {
 
 .skills-tags {
     margin-top: 2.5rem;
+    position: relative;
 }
 
 .tag {
@@ -177,6 +256,19 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     margin-right: 0.8rem;
     margin-bottom: 0.8rem;
     letter-spacing: 0.05em;
+    position: relative;
+}
+
+/* 7. 在標籤前加一個小小圓形印章 */
+.tag::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23DCD8C8"/></svg>'); 
+    background-size: contain;
+    margin-right: 0.3rem;
+    vertical-align: middle;
 }
 
 /* --- Contact --- */
@@ -189,6 +281,22 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     display: flex;
     gap: 3rem;
     margin-top: 3rem;
+    position: relative;
+}
+
+/* 8. 在聯繫連結旁放置一個淡淡的飛鳥插圖 */
+.contact-links::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 10 10 C 20 20, 30 30, 40 40 L 50 50 L 60 40 C 70 30, 80 20, 90 10 Z" fill="%2379826A" fill-opacity="0.3"/></svg>'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    right: -2rem;
+    transform: translateY(-50%);
 }
 
 .contact-item {
@@ -212,6 +320,24 @@ h1, h2, h3, .logo, .hero-title, .section-title {
     color: var(--border-color);
     font-size: 0.85rem;
     font-weight: 300;
+    border-top: 1px solid var(--border-color); /* 加入一條細緻的頂部邊框 */
+}
+
+.footer p {
+    position: relative;
+    display: inline-block;
+}
+
+/* 9. 在頁尾下方加一個小小圓形印章 */
+.footer p::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%2379826A"/></svg>'); 
+    background-size: contain;
+    margin-left: 0.5rem;
+    vertical-align: middle;
 }
 
 /* --- Responsive (響應式) --- */
