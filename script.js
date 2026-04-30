@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    console.log("Winnie's Portfolio Loaded.");
+    console.log("Winnie's Portfolio Loaded with a touch of elegance.");
 
     const navbar = document.querySelector('.navbar');
     
